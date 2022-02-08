@@ -35,10 +35,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Tasinmaz>> GetAll()
         {
-            /*if (DateTime.Now.Hour == 11)
+            if (DateTime.Now.Hour == 16)
             {
                 return new ErrorDataResult<List<Tasinmaz>>(Messages.MaintenanceTime);
-            }*/
+            }
             return new SuccessDataResult<List<Tasinmaz>>(_taşınmazDal.GetAll(),Messages.TasinmazsListed);
         }
 

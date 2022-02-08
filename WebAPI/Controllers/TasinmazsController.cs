@@ -19,14 +19,39 @@ namespace WebAPI.Controllers
             _tasinmazService = tasinmazService;
         }
 
-        [HttpGet]
-        public List<Tasinmaz> Get()
+        [HttpGet("getall")]
+        public IActionResult Get()
         {
 
             var result =_tasinmazService.GetAll();
-            return result.Data;
+            if (result.Success)
+            {
+                return Ok(result);
 
-            
+            }
+            return BadRequest(result);  
+        }
+        [HttpPost("add")]
+        public IActionResult Add(Tasinmaz tasinmaz)
+        {
+            var result =_tasinmazService.Add(tasinmaz);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id )
+        {
+
+            var result = _tasinmazService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+
+            }
+            return BadRequest(result);
         }
     }
 }

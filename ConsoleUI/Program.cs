@@ -33,7 +33,9 @@ namespace ConsoleUI
                 foreach (var tasinmaz in result.Data)
                 {
                     Console.WriteLine(tasinmaz.TasinmazAdi + "/" + tasinmaz.IlAdi);
+                    
                 }
+                Console.WriteLine(result.Message);
             }
             else
             {
