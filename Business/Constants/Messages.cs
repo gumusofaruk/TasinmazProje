@@ -13,5 +13,8 @@ namespace Business.Constants
         public static string TasinmazAdiInvalid = "Taşınmaz adı geçersiz";
         public static string MaintenanceTime="Sistem Bakımda";
         public static string TasinmazsListed="Taşınmazlar Listelendi";
+        public static string TasinmazCountofIlError="Bir Ilde en fazla 10 tasinmaz olabilir";
+        internal static string TasinmazNameAlreadyExists="Bu isimde başka taşınmaz var";
+        internal static string CategoryLimitExceded="Limit aşıldığı için taşınmaz eklenemiyor";
     }
 }

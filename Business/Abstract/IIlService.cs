@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Business.Abstract
 {
     public interface IIlService
     {
-        List<Il> GetAll();
-        Il GetById(int id);
+        IDataResult<List<Il>> GetAll();
+        IDataResult<Il> GetById(int id);
     }
 }

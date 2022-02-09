@@ -17,7 +17,7 @@ namespace ConsoleUI
         {
             IlManager ilManager = new IlManager(new EfIlDal());
 
-            foreach (var il in ilManager.GetAll())
+            foreach (var il in ilManager.GetAll().Data)
             {
                 Console.WriteLine(il.IlAdi);
             }
@@ -25,7 +25,8 @@ namespace ConsoleUI
 
         private static void TasinmazTest()
         {
-            TasinmazManager tasinmazManager = new TasinmazManager(new EfTasinmazDal());
+            TasinmazManager tasinmazManager = new TasinmazManager(new EfTasinmazDal()
+                ,new IlManager(new EfIlDal()));
 
             var result =tasinmazManager.GetTasinmazDetails();
             if (result.Success)

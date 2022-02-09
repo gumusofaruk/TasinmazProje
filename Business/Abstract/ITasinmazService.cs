@@ -16,5 +16,6 @@ namespace Business.Abstract
         IDataResult<List<TasinmazDetailDto>> GetTasinmazDetails();
         IDataResult<Tasinmaz> GetById(int id);
         IResult Add(Tasinmaz Tasinmaz);
+        IResult Update(Tasinmaz Tasinmaz);
     }
 }

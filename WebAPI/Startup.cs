@@ -33,8 +33,8 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            services.AddSingleton<ITasinmazService,TasinmazManager>();
-            services.AddSingleton<ITasinmazDal, EfTasinmazDal>();
+            //services.AddSingleton<ITasinmazService,TasinmazManager>();
+            //services.AddSingleton<ITasinmazDal, EfTasinmazDal>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
