@@ -3,6 +3,8 @@ using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -32,8 +34,9 @@ namespace Business.Concrete
             _ilService = ilService;
            
         }
-        [SecuredOperation("product.add,admin")]
+        [SecuredOperation("tasinmaz.add,admin")]
         [ValidationAspect(typeof(TasinmazValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Tasinmaz tasinmaz)
         {
             IResult result =BusinessRules.Run(CheckIfTasinmazNameExists(tasinmaz.TasinmazAdi), CheckIfTasinmazCountOfIlCorrect(tasinmaz.IlId),
@@ -48,7 +51,7 @@ namespace Business.Concrete
             
 
         }
-
+        [CacheAspect]
         public IDataResult<List<Tasinmaz>> GetAll()
         {
             if (DateTime.Now.Hour == 16)
@@ -62,7 +65,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Tasinmaz>>(_tasinmazDal.GetAll(p => p.IlId == id));
         }
-
+        [CacheAspect]
         public IDataResult<Tasinmaz> GetById(int id)
         {
             return new SuccessDataResult<Tasinmaz>(_tasinmazDal.Get(p=>p.TasinmazId==id));
@@ -72,8 +75,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<TasinmazDetailDto>>(_tasinmazDal.GetTasinmazDetails());
         }
-
-        public IResult Update(Tasinmaz Tasinmaz)
+        [ValidationAspect(typeof(TasinmazValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
+        public IResult Update(Tasinmaz tasinmaz)
         {
             throw new NotImplementedException();
         }
@@ -108,6 +112,17 @@ namespace Business.Concrete
 
             }
             return new SuccessResult();
+        }
+
+        public IResult Delete(Tasinmaz tasinmaz)
+        {
+                _tasinmazDal.Delete(tasinmaz);
+                return new SuccessResult(Messages.TasinmazDeleted);   
+        }
+        
+        public IResult AddTransactionalTest(Tasinmaz tasinmaz)
+        {
+            throw new NotImplementedException();
         }
     }
 }

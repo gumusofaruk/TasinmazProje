@@ -15,7 +15,9 @@ namespace Business.Abstract
         IDataResult<List<Tasinmaz>> GetAllByIlId(int id);
         IDataResult<List<TasinmazDetailDto>> GetTasinmazDetails();
         IDataResult<Tasinmaz> GetById(int id);
-        IResult Add(Tasinmaz Tasinmaz);
-        IResult Update(Tasinmaz Tasinmaz);
+        IResult Add(Tasinmaz tasinmaz);
+        IResult Update(Tasinmaz tasinmaz);
+        IResult AddTransactionalTest(Tasinmaz tasinmaz);    
+        IResult Delete(Tasinmaz tasinmaz);
     }
 }
