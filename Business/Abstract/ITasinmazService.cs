@@ -19,5 +19,6 @@ namespace Business.Abstract
         IResult Update(Tasinmaz tasinmaz);
         IResult AddTransactionalTest(Tasinmaz tasinmaz);    
         IResult Delete(Tasinmaz tasinmaz);
+        
     }
 }

@@ -1,12 +1,15 @@
-<!-- Welcome to {{title}}
-Hello {{user}}
-{{tasinmaz1.tasinmazName}}
+<div class="container">
+  <app-navi></app-navi>
+  <div class="row">
+    <div class="col-md-3">
+      <app-il></app-il>
+    </div>
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
+  
 
-<ul>
-  <li *ngFor="let tasinmaz of tasinmazs">{{tasinmaz.tasinmazName}}</li>
-</ul> -->
-<app-navi></app-navi>
-<app-il></app-il>
-<app-tasinmaz></app-tasinmaz>
-
-<router-outlet></router-outlet>
+  
+</div>

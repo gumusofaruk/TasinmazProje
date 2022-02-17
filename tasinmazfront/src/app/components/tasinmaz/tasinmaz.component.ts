@@ -1,21 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { Il } from "src/app/models/il";
+import { Tasinmaz } from "src/app/models/tasinmaz";
+import { CartService } from "src/app/services/cart.service";
+import { IlService } from "src/app/services/il.service";
+import { TasinmazService } from "src/app/services/tasinmaz.service";
 
 @Component({
-  selector: 'app-tasinmaz',
-  templateUrl: './tasinmaz.component.html',
-  styleUrls: ['./tasinmaz.component.css']
+  selector: "app-tasinmaz",
+  templateUrl: "./tasinmaz.component.html",
+  styleUrls: ["./tasinmaz.component.css"],
 })
 export class TasinmazComponent implements OnInit {
+  tasinmazs: Tasinmaz[] = [];
+  dataLoaded = false;
+  filterText = "";
+  constructor(
+    private tasinmazService: TasinmazService,
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
+    private cartService: CartService
+  ) {}
 
-  tasinmaz1 = { tasinmazId: 6, tasinmazName: "Şirket", ilId: 3, ilceId: 2 }
-  tasinmaz2 = { tasinmazId: 7, tasinmazName: "Şirket1", ilId: 3, ilceId: 2 }
-  tasinmaz3 = { tasinmazId: 8, tasinmazName: "Şirket2", ilId: 3, ilceId: 2 }
-  tasinmaz4 = { tasinmazId: 9, tasinmazName: "Şirket3", ilId: 3, ilceId: 2 }
-  tasinmazs = [this.tasinmaz1, this.tasinmaz2, this.tasinmaz3, this.tasinmaz4]
-
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params["ilId"]) {
+        this.getTasinmazsByIl(params["ilId"]);
+      } else {
+        this.getTasinmazs();
+      }
+    });
   }
-
+  getTasinmazs() {
+    this.tasinmazService.getTasinmazs().subscribe((response) => {
+      this.tasinmazs = response.data;
+      this.dataLoaded = true;
+    });
+  }
+  getTasinmazsByIl(ilId: number) {
+    this.tasinmazService.getTasinmazsByIl(ilId).subscribe((response) => {
+      this.tasinmazs = response.data;
+      this.dataLoaded = true;
+    });
+  }
+  addToCart(tasinmaz: Tasinmaz) {
+    if (tasinmaz.tasinmazId === 1) {
+      this.toastrService.error("Hata", "Bu taşınmaz sepete eklenemez");
+    } else {
+      this.toastrService.success("Sepete eklendi", tasinmaz.tasinmazAdi);
+      this.cartService.addToCart(tasinmaz);
+    }
+  }
 }

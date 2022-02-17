@@ -16,13 +16,13 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.TasinmazId).NotEmpty();
             RuleFor(p => p.IlId).NotEmpty();
             RuleFor(p => p.TasinmazAdi).NotEmpty();
-            RuleFor(p => p.TasinmazAdi).MinimumLength(2);
+            RuleFor(p => p.TasinmazAdi).MinimumLength(2);;
             //RuleFor(p => p.TasinmazAdi).Must(StartWithA).WithMessage("Tasinmazlar A harfi ile başlamadılır");
         }
 
         //private bool StartWithA(string arg)
         //{
-        //    return arg.StartsWith("A");
+        //   return arg.StartsWith("A");
         //}
     }
 }

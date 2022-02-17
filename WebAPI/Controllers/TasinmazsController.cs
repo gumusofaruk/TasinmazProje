@@ -5,6 +5,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -20,8 +21,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult Get()
+
+        public IActionResult GetAll()
         {
+            Thread.Sleep(1000);
 
             var result =_tasinmazService.GetAll();
             if (result.Success)
@@ -46,6 +49,19 @@ namespace WebAPI.Controllers
         {
 
             var result = _tasinmazService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getallbyilid")]
+        public IActionResult GetAllByIlId(int ilId)
+        {
+
+            var result = _tasinmazService.GetAllByIlId(ilId);
             if (result.Success)
             {
                 return Ok(result);

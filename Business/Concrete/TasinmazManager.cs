@@ -34,7 +34,7 @@ namespace Business.Concrete
             _ilService = ilService;
            
         }
-        [SecuredOperation("tasinmaz.add,admin")]
+        //[SecuredOperation("tasinmaz.add,admin")]
         [ValidationAspect(typeof(TasinmazValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Tasinmaz tasinmaz)
@@ -54,10 +54,10 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Tasinmaz>> GetAll()
         {
-            if (DateTime.Now.Hour == 16)
-            {
-                return new ErrorDataResult<List<Tasinmaz>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour == 16)
+            //{
+            //    return new ErrorDataResult<List<Tasinmaz>>(Messages.MaintenanceTime);
+            //}
             return new SuccessDataResult<List<Tasinmaz>>(_tasinmazDal.GetAll(),Messages.TasinmazsListed);
         }
 
